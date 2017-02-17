@@ -1,0 +1,42 @@
+﻿@using RJP.MultiUrlPicker.Models
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Master.cshtml";
+}
+
+@CurrentPage.GetGridHtml("content", "fanoe")
+
+<div class='dark'>
+    <div class='container'>
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div>
+
+                    <h2>@Model.Content.GetPropertyValue("signpostHeading1")</h2>
+                    <p>@Model.Content.GetPropertyValue("signpostCopy1")</p>
+                    @{
+                        var link1 = Model.Content.GetPropertyValue<MultiUrls>("signpostLink1").First();
+                        <p><a href="@link1.Url">@link1.Name →</a></p>
+                    }
+                    <p><br/></p>
+
+                    <h2>@Model.Content.GetPropertyValue("signpostHeading2")</h2>
+                    <p>@Model.Content.GetPropertyValue("signpostCopy2")</p>
+                    @{
+                        var link2 = Model.Content.GetPropertyValue<MultiUrls>("signpostLink2").First();
+                        <p><a href="@link2.Url">@link2.Name →</a></p>
+                    }
+                    <p><br/></p>
+
+                    <h2>@Model.Content.GetPropertyValue("signpostHeading3")</h2>
+                    <p>@Model.Content.GetPropertyValue("signpostCopy3")</p>
+                    @{
+                        var link3 = Model.Content.GetPropertyValue<MultiUrls>("signpostLink3").First();
+                        <p><a href="@link3.Url">@link3.Name →</a></p>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+﻿@using RJP.MultiUrlPicker.Models
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Master.cshtml";
+}
+
+@CurrentPage.GetGridHtml("content", "fanoe")
+
+<div class='dark'>
+    <div class='container'>
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div>
+
+                    @foreach (var signpost in Model.Content.Children)
+                    {
+                        var link = signpost.GetPropertyValue<MultiUrls>("link").First();
+                        <h2>@signpost.GetPropertyValue("heading")</h2>
+                        <p>@signpost.GetPropertyValue("copy")</p>
+                        <p><a href="@link.Url">@link.Name →</a></p>
+                        <p><br/></p>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

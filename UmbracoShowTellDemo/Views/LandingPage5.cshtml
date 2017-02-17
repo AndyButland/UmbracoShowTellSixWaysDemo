@@ -1,0 +1,39 @@
+﻿@using RJP.MultiUrlPicker.Models
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "Master.cshtml";
+}
+@CurrentPage.GetGridHtml("content", "fanoe")
+<div class='dark'>
+    <div class='container'>
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div>
+                    @{
+                        var spotlights = Model.Content.GetPropertyValue<IEnumerable<IPublishedContent>>("spotlights");
+                        foreach (var spotlight in spotlights)
+                        {
+                            var pickedSpotlight = spotlight.GetPropertyValue<IPublishedContent>("pickedSpotLight");
+                            if (pickedSpotlight == null)
+                            {
+                                var link = spotlight.GetPropertyValue<MultiUrls>("link").First();
+                                <h2>@spotlight.GetPropertyValue("heading")</h2>
+                                <p>@spotlight.GetPropertyValue("copy")</p>
+                                <p><a href="@link.Url">@link.Name →</a></p>
+                            }
+                            else
+                            {
+                                var link = pickedSpotlight.GetPropertyValue<MultiUrls>("link").First();
+                                <h2>@pickedSpotlight.GetPropertyValue("heading")</h2>
+                                <p>@pickedSpotlight.GetPropertyValue("copy")</p>
+                                <p><a href="@link.Url">@link.Name →</a></p>                                
+                            }
+
+                            <p><br/></p>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
